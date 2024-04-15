@@ -12,6 +12,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { login } from "./features/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import Nopage from "./components/Nopage";
+import Footer from "./components/Footer";
 
 function App() {
   const userData = useSelector((state) => state.user.value);
@@ -21,8 +22,10 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        console.log(uid);
         const getData = async () => {
           const q = query(collection(db, "users"), where("uid", "==", uid));
+          console.log(q);
           const querySnapshot = await getDocs(q);
           querySnapshot.forEach((doc) => {
             dispatch(
@@ -54,6 +57,7 @@ function App() {
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="*" element={<Nopage />} />
           </Routes>
+          <Footer />
         </>
       ) : (
         <>

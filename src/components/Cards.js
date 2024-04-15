@@ -31,7 +31,7 @@ const Cards = () => {
       ) : (
         <>
           {data.map((item) => (
-            <Link to={`/details/${item?.id}`}>
+            <Link key={item.id} to={`/details/${item?.id}`}>
               <div
                 key={item?.id}
                 className=" font-medium shadow-lg p-2 m-2 transition-all duration-500  hover:-translate-y-2 bg-slate-950 cursor-pointer md:mt-4 mt-1"
